@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Logo from "../assets/elifeLogo.png"
 
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { app } from "../services/Firebase";
+import { Navigate } from "react-router-dom";
 
 
 
@@ -11,20 +12,31 @@ const Login = () =>{
     const [password, setPassword] = useState("");
     const auth = getAuth(app);
 
-
+    const currentUser = localStorage.getItem("@firebase:user");
+    useEffect(()=>{
+        if(!!!currentUser){
+            <Navigate to="/Panel" replace={true} />
+        }
+    }
+    );
     function handleSignIn(e){
         e.preventDefault();
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 // Signed in 
                 const user = userCredential.user;
+                localStorage.setItem("@firebase:user", JSON.stringify(user));
                 // ...
-                console.log("ok!")
+                console.log("ok!");
+                window.location.reload(false);
             })
             .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
+                console.log(error.message)
             });
+    }
+
+    if(!!currentUser){
+        return <Navigate to="/" replace={true} />
     }
 
     return(
