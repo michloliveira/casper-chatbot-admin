@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {useState } from "react";
 import Logo from "../assets/elifeLogo.png"
 
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
@@ -13,12 +13,7 @@ const Login = () =>{
     const auth = getAuth(app);
 
     const currentUser = localStorage.getItem("@firebase:user");
-    useEffect(()=>{
-        if(!!!currentUser){
-            <Navigate to="/Panel" replace={true} />
-        }
-    }
-    );
+
     function handleSignIn(e){
         e.preventDefault();
         signInWithEmailAndPassword(auth, email, password)
@@ -31,6 +26,7 @@ const Login = () =>{
                 window.location.reload(false);
             })
             .catch((error) => {
+                alert("Usuário ou senha incorreta");
                 console.log(error.message)
             });
     }
