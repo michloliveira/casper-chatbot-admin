@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import NewsLogo from "../assets/news.jpg";
 
 import { addDoc, collection } from "firebase/firestore";
@@ -8,7 +8,17 @@ const CreateNews = () =>{
     let imageHeight = {
         height: 175
     }
-    const [imageNews, setImageNews] = useState(NewsLogo);
+
+    const [file, setFile] = useState(null);
+
+    useEffect(() => {
+        if(file){
+
+            console.log(file.name);
+        }
+
+    },[file]);
+
 
     const handleAdd = async(e) =>{
         e.preventDefault();
@@ -27,13 +37,12 @@ const CreateNews = () =>{
             <div>
                 <label className="form-label">Imagem</label>
                 <div class="mb-4 d-flex justify-content-center">
-                    <img src={imageNews} style={imageHeight}
-                    alt="Imagem da notícia" />
+                    {file ? <img src={URL.createObjectURL(file)} style={imageHeight}/> : <img src={NewsLogo} style={imageHeight}/>}
                 </div>
                 <div className="d-flex justify-content-center">
                     <div className="btn btn-primary btn-rounded btn-sm">
                         <label className="form-label text-white m-1" htmlFor="File1">Choose file</label>
-                        <input type="file" className="form-control d-none" id="File1" onChange={(e) => setImageNews(URL.createObjectURL(e.target.files[0]))}/>
+                        <input type="file" className="form-control d-none" id="File1" onChange={(e) => setFile(e.target.files[0])} />
                     </div>
                 </div>
             </div>
