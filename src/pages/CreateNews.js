@@ -10,16 +10,17 @@ const CreateNews = () =>{
         height: 175
     }
 
-    const [titulo, setTitulo] = useState("");
-    const [descricao, setDescricao] = useState("");
+    const [title, setTitle] = useState("");
+    const [description, setDescription] = useState("");
     const [link, setLink] = useState("");
-    const [imagem, setImagem] = useState("");
-    const [tema, setTema] = useState("");
+    const [image, setImage] = useState("");
+    const [theme, setTheme] = useState("entrete");
 
 
 
 
     const [file, setFile] = useState(null);
+    const [progress, setprogress] = useState(0)
 
     useEffect(() => {
         if(file){
@@ -36,6 +37,7 @@ const CreateNews = () =>{
                 // Observe state change events such as progress, pause, and resume
                 // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
                 const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                setprogress(progress);
                 console.log('Upload is ' + progress + '% done');
                 switch (snapshot.state) {
                     case 'paused':
@@ -56,6 +58,7 @@ const CreateNews = () =>{
                 // For instance, get the download URL: https://firebasestorage.googleapis.com/...
                 getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
                 console.log('File available at', downloadURL);
+                setImage(downloadURL);
                 });
             }
             );
@@ -66,9 +69,12 @@ const CreateNews = () =>{
 
     const handleAdd = async(e) =>{
         e.preventDefault();
-        const docRef = await addDoc(collection(db, "cities"), {
-            name: "Tokyo",
-            country: "Japan"
+        const docRef = await addDoc(collection(db, "news"), {
+            title: title,
+            description: description,
+            link: link,
+            image: image,
+            theme: theme
           });
 
           console.log("Document written with ID: ", docRef.id);
@@ -93,25 +99,31 @@ const CreateNews = () =>{
 
                 <div className="form-outline mb-4">
                     <label className="form-label" >Título</label>
-                    <input type="text"  className="form-control" />
+                    <input type="text"  className="form-control" onChange={e => setTitle(e.target.value)}/>
                 </div>
                 <div className="form-outline mb-4">
-                    <select className="form-select" aria-label="Default select example">
-                        <option selected value= "0" >Entretenimento</option>
-                        <option value="1">Música</option>
-                        <option value="2">Esportes</option>
-                        <option value="3">Three</option>
+                    <select className="form-select" aria-label="Default select example" onChange={e => setTheme(e.target.value)}>
+                        <option selected value= "entretenimento" >Entretenimento</option>
+                        <option value="Musica">Música</option>
+                        <option value="Esportes">Esportes</option>
+                        <option value="Politica">Política</option>
+                        <option value="Tecnologia">Tecnologia</option>
                     </select>
                 </div>
 
                 <div className="form-outline mb-4">
                     <label className="form-label" >Descrição</label>
-                    <textarea className="form-control"  rows="4"></textarea>
+                    <textarea className="form-control"  rows="4" onChange={e => setDescription(e.target.value)}></textarea>
+                </div>
+
+                <div className="form-outline mb-4">
+                    <label className="form-label" >Link</label>
+                    <input type="text"  className="form-control" onChange={e => setLink(e.target.value)}/>
                 </div>
 
 
 
-                <button type="submit" className="btn btn-primary btn-block mb-4">Enviar</button>
+                <button type="submit" className="btn btn-primary btn-block mb-4" disabled={!!!file && progress < 100}>Enviar</button>
             </form>
         </main>
         </>
