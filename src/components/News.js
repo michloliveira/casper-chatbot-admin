@@ -1,16 +1,16 @@
 
 function News(props){
     let imageHeight = {
-        height: 100,
+        height: 80,
     }
     return(
         <tr>
-            <td><div><img src={props.image} alt="imagem da notícia" style={imageHeight}></img></div></td>
-            <td>{props.title}</td>
-            <td>{props.description}</td>
-            <td>{props.theme}</td>
-            <td><a href={props.link}>{props.link}</a></td>
-            <td><button type="button" class="btn btn-outline-danger">Remover</button></td>
+            <td className="align-middle"><img src={props.image} alt="imagem da notícia" style={imageHeight}></img></td>
+            <td className="align-middle">{props.title}</td>
+            <td className="align-middle">{props.description}</td>
+            <td className="align-middle">{props.theme}</td>
+            <td className="align-middle"><a href={props.link}>{props.link}</a></td>
+            <td className="align-middle"><button type="button" class="btn btn-outline-danger">Remover</button></td>
         </tr>
     );
 }

@@ -31,7 +31,7 @@ function Dashboard(){
 console.log(data);
     const dataView = data.map((data) => {
         return(
-            <News image={data.image} title={data.title} description={data.description} link={data.description}/>
+            <News image={data.image} title={data.title} description={data.description} theme={data.theme} link={data.description}/>
         );
     })
 

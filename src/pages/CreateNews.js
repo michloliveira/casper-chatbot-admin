@@ -4,11 +4,13 @@ import NewsLogo from "../assets/news.jpg";
 import { addDoc, collection } from "firebase/firestore";
 import { db, storage } from "../services/Firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { Navigate } from "react-router-dom";
 
 const CreateNews = () =>{
     let imageHeight = {
         height: 175
     }
+    const [created,setCreated] = useState(false);
 
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
@@ -21,6 +23,7 @@ const CreateNews = () =>{
 
     const [file, setFile] = useState(null);
     const [progress, setprogress] = useState(0)
+
 
     useEffect(() => {
         if(file){
@@ -78,6 +81,11 @@ const CreateNews = () =>{
           });
 
           console.log("Document written with ID: ", docRef.id);
+          setCreated(true);
+    }
+
+    if(created){
+        return <Navigate to="/" replace={true} />
     }
 
     return(
