@@ -1,6 +1,12 @@
 import News from "../components/News";
 
-function Table(){
+function Table(Data){
+    const dataView = Data.map((data) => {
+        return(
+            <News image={data.image} title={data.title} description={data.description} link={data.description}/>
+        );
+    })
+
     return(
         <table class="table table-striped">
             <thead>
@@ -13,9 +19,7 @@ function Table(){
                 </tr>
             </thead>
             <tbody>
-                <News image="image" title="tilte2" description="jhdjfhsakfja" theme="Musica" link="www.soundcloud.com"/>
-                <News image="image" title="tilte2" description="jhdjfhsakfja" theme="Musica" link="www.soundcloud.com"/>
-                <News image="image" title="tilte2" description="jhdjfhsakfja" theme="Musica" link="www.soundcloud.com"/>
+                {dataView}
             </tbody>
 
         </table>
