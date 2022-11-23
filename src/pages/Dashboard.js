@@ -40,7 +40,7 @@ const handleDelete = async(id) => {
 console.log(data);
     const dataView = data.map((data) => {
         return(
-            <News image={data.image} title={data.title} description={data.description} theme={data.theme} link={data.description} id={data.id} delete ={handleDelete}/>
+            <News image={data.image} title={data.title} description={data.description} theme={data.theme} link={data.link} id={data.id} delete ={handleDelete}/>
         );
     })
 

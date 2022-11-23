@@ -16,7 +16,7 @@ const CreateNews = () =>{
     const [description, setDescription] = useState("");
     const [link, setLink] = useState("");
     const [image, setImage] = useState("");
-    const [theme, setTheme] = useState("entrete");
+    const [theme, setTheme] = useState("entretenimento");
 
 
 
