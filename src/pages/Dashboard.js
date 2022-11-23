@@ -1,4 +1,4 @@
-import { collection, getDocs } from "firebase/firestore";
+import { collection, deleteDoc, doc, getDocs } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import {useNavigate } from "react-router-dom";
 import Header from "../components/Header";
@@ -28,10 +28,19 @@ function Dashboard(){
         fetchData();
     }, []);
 
+const handleDelete = async(id) => {
+    try{
+        await deleteDoc(doc(db,"news", id));
+        setData(data.filter((item) => item.id !== id));
+    }
+    catch(err){
+        console.log(err);
+    }
+}
 console.log(data);
     const dataView = data.map((data) => {
         return(
-            <News image={data.image} title={data.title} description={data.description} theme={data.theme} link={data.description}/>
+            <News image={data.image} title={data.title} description={data.description} theme={data.theme} link={data.description} id={data.id} delete ={handleDelete}/>
         );
     })
 

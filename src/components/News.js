@@ -10,7 +10,7 @@ function News(props){
             <td className="align-middle">{props.description}</td>
             <td className="align-middle">{props.theme}</td>
             <td className="align-middle"><a href={props.link}>{props.link}</a></td>
-            <td className="align-middle"><button type="button" class="btn btn-outline-danger">Remover</button></td>
+            <td className="align-middle"><button type="button" class="btn btn-outline-danger" onClick={() => {props.delete(props.id)}}>Remover</button></td>
         </tr>
     );
 }
