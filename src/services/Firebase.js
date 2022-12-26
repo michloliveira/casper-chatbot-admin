@@ -3,13 +3,13 @@ import {getFirestore} from "firebase/firestore"
 import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBdEpK3PLWlHG0AqeMeL-YiLOooV9bnW0I",
-  authDomain: "casper-chatbot-nkfe.firebaseapp.com",
-  databaseURL: "https://casper-chatbot-nkfe-default-rtdb.firebaseio.com",
-  projectId: "casper-chatbot-nkfe",
-  storageBucket: "casper-chatbot-nkfe.appspot.com",
-  messagingSenderId: "258221553296",
-  appId: "1:258221553296:web:d46245364d842b7e7d0a15"
+  apiKey: "",
+  authDomain: "",
+  databaseURL: "",
+  projectId: "",
+  storageBucket: "",
+  messagingSenderId: "",
+  appId: ""
 };
 
 // Initialize Firebase
